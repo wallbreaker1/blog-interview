@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /static/
+Disallow: /private/
+
+Sitemap: /sitemap.xml
+
+# Optional: Add crawl-delay if needed for search engine rate limiting.
+# Crawl-delay: 10
