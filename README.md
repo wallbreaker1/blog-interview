@@ -1,36 +1,88 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Blog Application - Next.js & Tailwind CSS
 
-## Getting Started
+## 🚀 Project Overview
+This is a simple **Blog Application** built using **Next.js** and **Tailwind CSS**. The project fetches and displays blog posts from the **JSONPlaceholder API**, uses **static site generation (SSG)** for fast performance, and includes a **hashtag search feature** for filtering posts.
 
-First, run the development server:
+## 🎯 Features
+### ✅ **Homepage (`/`):**
+- Fetches posts from [JSONPlaceholder](https://jsonplaceholder.typicode.com/posts) using **`getStaticProps`**.
+- Displays blog post previews in a **responsive grid layout**.
+- Each post includes:
+  - Clickable **title** leading to the full post.
+  - The first **100 characters** of the body.
+  - A **"Read More"** button linking to the full post.
 
+### ✅ **Post Details Page (`/post/[id]`):**
+- Uses **`getStaticPaths`** and **`getStaticProps`** to statically generate individual post pages.
+- Displays full **title, body, author ID, and post ID**.
+- Extracts **hashtags dynamically** from post titles.
+- Allows users to **filter posts by hashtags**.
+
+### ✅ **Hashtag Search:**
+- Extracts keywords from post titles (words longer than 9 characters).
+- Clicking a hashtag filters posts containing that word.
+- Users can **clear filters** to reset the view.
+
+### ✅ **Pagination:**
+- Displays **9 posts per page**.
+- Preserves hashtag filtering across pagination.
+
+### ✅ **Navigation:**
+-**Navbar** with links to:
+  - **Home (`/`)**
+  - **About (`/about`)** (Describes the project and its features)
+
+### ✅ **Responsive Design:**
+- Mobile-friendly layout using **Tailwind CSS**.
+
+### ✅ **Reusable Components:**
+- `PostCard`: Displays post preview.
+- `Pagination`: Handles navigation between pages.
+- `Button`: Standardized buttons across the app.
+- `HashtagFilter`: Filters posts by hashtags.
+
+## 📌 Installation & Setup
+### 1️⃣ Clone the Repository
+```bash
+git clone https://github.com/wallbreaker1/blog-interview.git
+cd blog-interview
+```
+
+### 2️⃣ Install Dependencies
+```bash
+npm install
+# or
+yarn install
+```
+
+### 3️⃣ Run the Development Server
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
+Then open **[http://localhost:3000](http://localhost:3000)** in your browser.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🌐 Deployment
+- The project is deployed on **Vercel**.
+- Live URL: [Your Vercel Link Here]
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📖 About This Project
+- This project was built as a **technical interview task**.
+- **SSG (`getStaticProps` and `getStaticPaths`)** was used for performance optimization.
+- Even though `getStaticProps` is now somewhat legacy, the implementation was required for the task.
+- The **hashtag search feature** was implemented without predefined hashtags; instead, **repeated words** in post titles were extracted dynamically.
+- **Potential improvements:**
+  - Implement **server-side rendering (SSR)** for real-time updates.
+  - Use **database storage** instead of a static API.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠 Technologies Used
+- **Next.js** (Static Site Generation, Dynamic Routing)
+- **Tailwind CSS** (Utility-first styling)
+- **TypeScript** (Strongly-typed JavaScript)
+- **JSONPlaceholder API** (Mock API for blog posts)
+- **Vercel** (Hosting and deployment)
 
-## Learn More
+## 📩 Contact
+For more projects and collaboration, check out my **[portfolio](https://www.andrei-serban.website/#portfolio)**!
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
