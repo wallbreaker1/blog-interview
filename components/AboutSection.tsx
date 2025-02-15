@@ -19,7 +19,7 @@ export default function AboutSection() {
 
       <h2 className="text-2xl font-semibold text-blue-600 mb-3">Considerations on Next.js Data Fetching</h2>
       <p className="text-gray-600 mb-4">
-        While <code>getStaticProps</code> and <code>getStaticPaths</code> were used in this implementation, they are now considered somewhat legacy in favor of Next.js's new App Router approach.
+        While <code>getStaticProps</code> and <code>getStaticPaths</code> were used in this implementation, they are now considered somewhat legacy in favor of Next.js&apos;s new App Router approach.
         However, many companies still rely on the Pages Router, which is probably why this approach was chosen for this project.
       </p>
 
