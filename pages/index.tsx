@@ -14,14 +14,16 @@ interface Post {
 
 interface HomePageProps {
   posts: Post[];
-  hashtags: string[];
+  hashtags: Array<string>;
 }
 
 export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
   const posts: Post[] = await getAllPosts();
   const hashtags: string[] = Array.from(
     new Set(
-      posts.flatMap((post: Post) => post.title.split(' ').filter((word: string) => word.length > 9))
+      posts.flatMap((post: Post) =>
+        post.title.split(' ').filter((word: string) => word.length > 9)
+      )
     )
   );
 
@@ -34,13 +36,26 @@ export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
 };
 
 export default function HomePage({ posts, hashtags }: HomePageProps) {
-  const [selectedHashtag, setSelectedHashtag] = useState<string | null>(null);
+  const [selectedHashtags, setSelectedHashtags] = useState<string[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 9;
 
-  const filteredPosts = selectedHashtag
-    ? posts.filter((post: Post) => post.title.includes(selectedHashtag))
-    : posts;
+  function handleToggleHashtag(tag: string) {
+    setSelectedHashtags((prev) =>
+      prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
+    );
+  }
+
+  function handleClearHashtags() {
+    setSelectedHashtags([]);
+  }
+
+  const filteredPosts =
+    selectedHashtags.length > 0
+      ? posts.filter((post) =>
+          selectedHashtags.every((tag) => post.title.includes(tag))
+        )
+      : posts;
 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
@@ -51,25 +66,22 @@ export default function HomePage({ posts, hashtags }: HomePageProps) {
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-4xl font-bold mb-6 text-blue-700">Blog Posts</h1>
 
+
       <HashtagFilter
         hashtags={hashtags}
-        selectedHashtag={selectedHashtag}
-        onSelectHashtag={(tag) => {
-          setSelectedHashtag(tag);
-          setCurrentPage(1);
-        }}
-        onClearFilter={() => {
-          setSelectedHashtag(null);
-          setCurrentPage(1);
-        }}
+        selectedHashtag={selectedHashtags.join(', ')}
+        onSelectHashtag={handleToggleHashtag}
+        onClearFilter={handleClearHashtags}
       />
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {currentPosts.map((post: Post) => (
-          <PostCard key={post.id} post={post} />
-        ))}
+        {currentPosts.length > 0 ? (
+          currentPosts.map((post: Post) => <PostCard key={post.id} post={post} />)
+        ) : (
+          <p className="text-gray-500">No posts match the selected hashtags.</p>
+        )}
       </div>
-        
+
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
@@ -78,4 +90,4 @@ export default function HomePage({ posts, hashtags }: HomePageProps) {
       />
     </div>
   );
-} 
+}

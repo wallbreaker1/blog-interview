@@ -1,7 +1,7 @@
-// PostDetails.tsx (Improved layout and styling)
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
 import { getAllPosts, getPostById } from '@/lib/fetchPosts';
 import Link from 'next/link';
+import Button from '@/components/Button';
 
 interface Post {
   userId: number;
@@ -59,9 +59,9 @@ export default function PostDetails({ post, hashtags }: PostDetailsProps) {
       </div>
 
       <Link href="/">
-        <button className="bg-indigo-500 hover:bg-indigo-600 text-white font-semibold py-2 px-4 rounded transition">
+        <Button className="bg-indigo-500 hover:bg-indigo-600 text-white font-semibold py-2 px-4 rounded transition">
           ← Back
-        </button>
+        </Button>
       </Link>
     </div>
   );
