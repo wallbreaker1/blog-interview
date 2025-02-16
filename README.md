@@ -65,7 +65,7 @@ Then open **[http://localhost:3000](http://localhost:3000)** in your browser.
 
 ## 🌐 Deployment
 - The project is deployed on **Vercel**.
-- Live URL: [Your Vercel Link Here]
+- Live URL: https://blog-interview.vercel.app/ 
 
 ## 📖 About This Project
 - This project was built as a **technical interview task**.
